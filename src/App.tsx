@@ -1,11 +1,11 @@
-// App.tsx
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AuthProvider, useAuth } from './src/contexts/AuthContext';
-import LoginScreen from './src/screens/Authentication/LoginScreen';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import LoginScreen from './screens/Authentication/LoginScreen';
+import RegisterScreen from './screens/Authentication/RegisterScreen';
 
 // Placeholder para as telas autenticadas que serão implementadas depois
 const HomeScreen = () => <></>;
@@ -19,10 +19,13 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!authState.token ? (
-          
-          <Stack.Screen name="Login" component={LoginScreen} />
+          // Fluxo não autenticado
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </>
         ) : (
-          
+          // Fluxo autenticado
           <Stack.Screen name="Home" component={HomeScreen} />
         )}
       </Stack.Navigator>
